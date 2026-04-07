@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ed647b, #df83a9);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            transition: 0.5s;
+            z-index: 10;
+        }
+        
+        h1 {
+            color: #ff4d6d;
+            margin-bottom: 30px;
+            min-height: 80px;
+        }
+        
+        .buttons {
+            position: relative;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .yes {
+            background-color: #ff4d6d;
+            color: white;
+            z-index: 5;
+            position: relative;
+        }
+        
+        .no {
+            background-color: #ccc;
+            color: black;
+            position: absolute;
+            /* Essential for moving */
+            transition: 0.1s ease;
+        }
+        
+        .success {
+            text-align: center;
+            color: white;
+            animation: fadeIn 1s ease-in-out;
+            z-index: 10;
+        }
+        
+        .success h2 {
+            font-size: 40px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #loveImage {
+            width: 200px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            color: white;
+            font-size: 20px;
+            animation: float linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(110vh);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card" id="proposalCard">
+        <h1 id="questionText">Will You Be My Valentine? 💖</h1>
+        <div class="buttons" id="btnContainer">
+            <button class="btn yes" id="yesBtn" onclick="handleyes()">Yes ❤️</button>
+            <button class="btn no" id="noBtn" onmouseover="handleNo(event)" style="left: 180px;">No 🙈</button>
+        </div>
+    </div>
+
+    <div class="success hidden" id="successMessage">
+        <h2>Happy Valentine's Day 💕</h2>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg5IhAfv2AlU5US4zHTDkAj-o80YcYsODdpQ&s" alt="Love Image" id="loveImage">
+        <p>You just made my day special! 💖</p>
+    </div>
+
+    <div class="hearts" id="heartsContainer"></div>
+
+    <script>
+        function handleyes() {
+            console.log("✅ Yes button clicked!");
+
+
+            document.getElementById("proposalCard").classList.add("hidden");
+            document.getElementById("successMessage").classList.remove("hidden");
+
+
+            createHearts();
+        }
+
+        function handleNo(event) {
+            const btn = event.target;
+
+            const maxX = window.innerWidth - btn.offsetWidth;
+            const maxY = window.innerHeight - btn.offsetHeight;
+            let newX = Math.random() * maxX;
+            let newY = Math.random() * maxY;
+
+
+            btn.style.position = "fixed";
+            btn.style.left = newX + "px";
+            btn.style.top = newY + "px";
+
+
+            console.log(`🚀 "No" button escaped to: X: ${Math.round(newX)}, Y: ${Math.round(newY)}`);
+        }
+
+
+
+
+        /*
+                function createHearts() {
+                    const heartsContainer = document.getElementById("heartsContainer");
+
+                    setInterval(() => {
+                        const heart = document.createElement("div");
+                        heart.classList.add("heart");
+                        heart.innerHTML = "💖";
+                        heart.style.left = Math.random() * 100 + "vw";
+                        heart.style.fontSize = Math.random() * 20 + 20 + "px";
+                        heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+                        heartsContainer.appendChild(heart);
+
+          
+                        setTimeout(() => {
+                            heart.remove();
+                        }, 5000);
+                    }, 300);
+                }
+                    */
+    </script>
+</body>
+
+</html>
